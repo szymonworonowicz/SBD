@@ -1,0 +1,65 @@
+@model SBD.Models.Donacja
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+
+<h4>Donacja</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Donacjaid" />
+            <div class="form-group">
+                <label asp-for="Donatorid" class="control-label"></label>
+                <select asp-for="Donatorid" class="form-control" asp-items="ViewBag.Donatorid"></select>
+                <span asp-validation-for="Donatorid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Badaniaid" class="control-label"></label>
+                <select asp-for="Badaniaid" class="form-control" asp-items="ViewBag.Badaniaid"></select>
+                <span asp-validation-for="Badaniaid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pielegniarkaid" class="control-label"></label>
+                <select asp-for="Pielegniarkaid" class="form-control" asp-items="ViewBag.Pielegniarkaid"></select>
+                <span asp-validation-for="Pielegniarkaid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Typid" class="control-label"></label>
+                <select asp-for="Typid" class="form-control" asp-items="ViewBag.Typid"></select>
+                <span asp-validation-for="Typid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IloscDonacji" class="control-label"></label>
+                <input asp-for="IloscDonacji" class="form-control" />
+                <span asp-validation-for="IloscDonacji" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Datadonacji" class="control-label"></label>
+                <input asp-for="Datadonacji" class="form-control" />
+                <span asp-validation-for="Datadonacji" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

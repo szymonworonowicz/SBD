@@ -1,0 +1,39 @@
+@model SBD.Models.TypDonacji
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+<div>
+    <h4>TypDonacji</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Typ)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Typ)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Czestotliwosc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Czestotliwosc)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Typid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</body>
+</html>

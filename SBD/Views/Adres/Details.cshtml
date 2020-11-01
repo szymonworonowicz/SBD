@@ -1,0 +1,51 @@
+@model SBD.Models.Adres
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+<div>
+    <h4>Adres</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Miasto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Miasto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ulica)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ulica)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nrbudynku)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nrbudynku)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kodpocztowy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kodpocztowy)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Adresid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</body>
+</html>

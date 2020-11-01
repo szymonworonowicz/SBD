@@ -1,0 +1,67 @@
+@model IEnumerable<SBD.Models.Kartazdrowia>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Syfilis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zapaleniewatrobyb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zapaleniewatrobyc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hiv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Malaria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Syfilis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zapaleniewatrobyb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zapaleniewatrobyc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hiv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Malaria)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Kartaid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Kartaid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Kartaid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

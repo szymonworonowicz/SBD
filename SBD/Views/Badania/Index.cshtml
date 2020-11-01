@@ -1,0 +1,67 @@
+@model IEnumerable<SBD.Models.Badania>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Hemoglobina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temperatura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cisnienie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tetno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Karta)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hemoglobina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temperatura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cisnienie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tetno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Karta.Kartaid)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Badaniaid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Badaniaid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Badaniaid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,57 @@
+@model SBD.Models.Transfuzja
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+<div>
+    <h4>Transfuzja</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PotrzebnaIlosc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PotrzebnaIlosc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataTransfuzji)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataTransfuzji)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Badania)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Badania.Badaniaid)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pacjent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pacjent.Pacjentid)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pielegniarka)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pielegniarka.Pielegniarkaid)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Transfuzjaid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</body>
+</html>

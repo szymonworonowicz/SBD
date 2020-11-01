@@ -1,0 +1,65 @@
+@model SBD.Models.Worek
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+
+<h4>Worek</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Worekid" />
+            <div class="form-group">
+                <label asp-for="Bankid" class="control-label"></label>
+                <select asp-for="Bankid" class="form-control" asp-items="ViewBag.Bankid"></select>
+                <span asp-validation-for="Bankid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transfuzjaid" class="control-label"></label>
+                <select asp-for="Transfuzjaid" class="form-control" asp-items="ViewBag.Transfuzjaid"></select>
+                <span asp-validation-for="Transfuzjaid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Donacjaid" class="control-label"></label>
+                <select asp-for="Donacjaid" class="form-control" asp-items="ViewBag.Donacjaid"></select>
+                <span asp-validation-for="Donacjaid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wielkosc" class="control-label"></label>
+                <input asp-for="Wielkosc" class="form-control" />
+                <span asp-validation-for="Wielkosc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Grupakrwi" class="control-label"></label>
+                <input asp-for="Grupakrwi" class="form-control" />
+                <span asp-validation-for="Grupakrwi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rh" class="control-label"></label>
+                <input asp-for="Rh" class="form-control" />
+                <span asp-validation-for="Rh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

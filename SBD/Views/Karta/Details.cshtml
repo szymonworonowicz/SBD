@@ -1,0 +1,57 @@
+@model SBD.Models.Kartazdrowia
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+<div>
+    <h4>Kartazdrowia</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Syfilis)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Syfilis)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Zapaleniewatrobyb)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Zapaleniewatrobyb)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Zapaleniewatrobyc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Zapaleniewatrobyc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Hiv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hiv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Malaria)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Malaria)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Kartaid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</body>
+</html>

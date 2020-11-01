@@ -1,0 +1,73 @@
+@model IEnumerable<SBD.Models.Worek>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Wielkosc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grupakrwi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bank)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Donacja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfuzja)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wielkosc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grupakrwi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bank.Bankid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Donacja.Donacjaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transfuzja.Transfuzjaid)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Worekid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Worekid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Worekid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

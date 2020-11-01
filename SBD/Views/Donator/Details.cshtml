@@ -1,0 +1,63 @@
+@model SBD.Models.Donator
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+<div>
+    <h4>Donator</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GrupaKrwi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GrupaKrwi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Waga)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Waga)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Wzrost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Wzrost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nastepnadonacja)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nastepnadonacja)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Osoba)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Osoba.Osobaid)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Donatorid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</body>
+</html>
