@@ -13,9 +13,9 @@ namespace SBD
     {
         private readonly ModelContext _context;
 
-        public AdresController(ModelContext context)
+        public AdresController()
         {
-            _context = context;
+            _context = new ModelContext();
         }
 
         // GET: Adres
@@ -72,7 +72,8 @@ namespace SBD
                 return NotFound();
             }
 
-            var adres = await _context.Adres.FindAsync(id);
+            var adresses = await _context.Adres.ToListAsync(); 
+            var adres = adresses.FirstOrDefault(x=>x.Adresid == id);
             if (adres == null)
             {
                 return NotFound();

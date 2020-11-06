@@ -202,3 +202,8 @@ C:\Users\user\source\repos\SBD\SBD\obj\Debug\netcoreapp3.1\Razor\Views\TypDonacj
 C:\Users\user\source\repos\SBD\SBD\obj\Debug\netcoreapp3.1\Razor\Views\TypDonacji\Details.cshtml.g.cs
 C:\Users\user\source\repos\SBD\SBD\obj\Debug\netcoreapp3.1\Razor\Views\TypDonacji\Edit.cshtml.g.cs
 C:\Users\user\source\repos\SBD\SBD\obj\Debug\netcoreapp3.1\Razor\Views\TypDonacji\Index.cshtml.g.cs
+C:\Users\user\source\repos\SBD\SBD\obj\Debug\netcoreapp3.1\Razor\Views\Worek\Create.cshtml.g.cs
+C:\Users\user\source\repos\SBD\SBD\obj\Debug\netcoreapp3.1\Razor\Views\Worek\Delete.cshtml.g.cs
+C:\Users\user\source\repos\SBD\SBD\obj\Debug\netcoreapp3.1\Razor\Views\Worek\Details.cshtml.g.cs
+C:\Users\user\source\repos\SBD\SBD\obj\Debug\netcoreapp3.1\Razor\Views\Worek\Edit.cshtml.g.cs
+C:\Users\user\source\repos\SBD\SBD\obj\Debug\netcoreapp3.1\Razor\Views\Worek\Index.cshtml.g.cs
