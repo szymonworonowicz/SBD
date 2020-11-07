@@ -72,8 +72,7 @@ namespace SBD
                 return NotFound();
             }
 
-            var adresses = await _context.Adres.ToListAsync(); 
-            var adres = adresses.FirstOrDefault(x=>x.Adresid == id);
+            var adres = await _context.Adres.FirstOrDefaultAsync(x => x.Adresid == id);
             if (adres == null)
             {
                 return NotFound();
