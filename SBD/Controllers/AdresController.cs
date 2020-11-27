@@ -7,15 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SBD.Models;
 
-namespace SBD
+namespace SBD.Controllers
 {
     public class AdresController : Controller
     {
         private readonly ModelContext _context;
 
-        public AdresController()
+        public AdresController(ModelContext context)
         {
-            _context = new ModelContext();
+            _context = context;
         }
 
         // GET: Adres
@@ -72,7 +72,7 @@ namespace SBD
                 return NotFound();
             }
 
-            var adres = await _context.Adres.FirstOrDefaultAsync(x => x.Adresid == id);
+            var adres = await _context.Adres.FindAsync(id);
             if (adres == null)
             {
                 return NotFound();

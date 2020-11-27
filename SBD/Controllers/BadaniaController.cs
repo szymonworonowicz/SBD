@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SBD.Models;
 
-namespace SBD
+namespace SBD.Controllers
 {
     public class BadaniaController : Controller
     {
