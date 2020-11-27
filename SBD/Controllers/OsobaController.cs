@@ -59,6 +59,7 @@ namespace SBD.Controllers
             {
                 _context.Add(osoba);
                 await _context.SaveChangesAsync();
+                _context.Attach(osoba).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
             return View(osoba);
@@ -98,6 +99,7 @@ namespace SBD.Controllers
                 {
                     _context.Update(osoba);
                     await _context.SaveChangesAsync();
+                    _context.Attach(osoba).State = EntityState.Detached;
                 }
                 catch (DbUpdateConcurrencyException)
                 {

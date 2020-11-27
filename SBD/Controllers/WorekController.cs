@@ -66,6 +66,7 @@ namespace SBD.Controllers
             {
                 _context.Add(worek);
                 await _context.SaveChangesAsync();
+                _context.Attach(worek).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Bankid"] = new SelectList(_context.Bankkrwi, "Bankid", "Bankid", worek.Bankid);
@@ -111,6 +112,7 @@ namespace SBD.Controllers
                 {
                     _context.Update(worek);
                     await _context.SaveChangesAsync();
+                    _context.Attach(worek).State = EntityState.Detached;
                 }
                 catch (DbUpdateConcurrencyException)
                 {

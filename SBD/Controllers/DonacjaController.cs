@@ -68,6 +68,7 @@ namespace SBD.Controllers
             {
                 _context.Add(donacja);
                 await _context.SaveChangesAsync();
+                _context.Attach(donacja).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Badaniaid"] = new SelectList(_context.Badania, "Badaniaid", "Badaniaid", donacja.Badaniaid);
@@ -115,6 +116,7 @@ namespace SBD.Controllers
                 {
                     _context.Update(donacja);
                     await _context.SaveChangesAsync();
+                    _context.Attach(donacja).State = EntityState.Detached;
                 }
                 catch (DbUpdateConcurrencyException)
                 {

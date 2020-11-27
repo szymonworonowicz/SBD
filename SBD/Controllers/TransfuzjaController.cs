@@ -66,6 +66,7 @@ namespace SBD.Controllers
             {
                 _context.Add(transfuzja);
                 await _context.SaveChangesAsync();
+                _context.Attach(transfuzja).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Badaniaid"] = new SelectList(_context.Badania, "Badaniaid", "Badaniaid", transfuzja.Badaniaid);
@@ -111,6 +112,7 @@ namespace SBD.Controllers
                 {
                     _context.Update(transfuzja);
                     await _context.SaveChangesAsync();
+                    _context.Attach(transfuzja).State = EntityState.Detached;
                 }
                 catch (DbUpdateConcurrencyException)
                 {

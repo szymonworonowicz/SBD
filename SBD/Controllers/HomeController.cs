@@ -11,9 +11,6 @@ namespace SBD.Controllers
     {
         public IActionResult Index()
         {
-            //ModelContext context = new ModelContext();
-
-            //context.Database.EnsureCreated();
             return View();
         }
     }

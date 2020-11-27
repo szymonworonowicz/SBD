@@ -59,6 +59,7 @@ namespace SBD.Controllers
             {
                 _context.Add(typDonacji);
                 await _context.SaveChangesAsync();
+                _context.Attach(typDonacji).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
             return View(typDonacji);
@@ -98,6 +99,7 @@ namespace SBD.Controllers
                 {
                     _context.Update(typDonacji);
                     await _context.SaveChangesAsync();
+                    _context.Attach(typDonacji).State = EntityState.Detached;
                 }
                 catch (DbUpdateConcurrencyException)
                 {
