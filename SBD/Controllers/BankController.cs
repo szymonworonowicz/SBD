@@ -47,7 +47,7 @@ namespace SBD.Controllers
         // GET: Bank/Create
         public IActionResult Create()
         {
-            ViewData["Adresid"] = new SelectList(_context.Adres, "Adresid", "Adresid");
+            ViewData["Adresid"] = new SelectList(_context.Adres, "Adresid", "Info");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace SBD.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Adresid"] = new SelectList(_context.Adres, "Adresid", "Adresid", bankkrwi.Adresid);
+            ViewData["Adresid"] = new SelectList(_context.Adres, "Adresid", "Info", bankkrwi.Adresid);
             return View(bankkrwi);
         }
 
@@ -81,7 +81,7 @@ namespace SBD.Controllers
             {
                 return NotFound();
             }
-            ViewData["Adresid"] = new SelectList(_context.Adres, "Adresid", "Adresid", bankkrwi.Adresid);
+            ViewData["Adresid"] = new SelectList(_context.Adres, "Adresid", "Info", bankkrwi.Adresid);
             return View(bankkrwi);
         }
 
@@ -117,7 +117,7 @@ namespace SBD.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Adresid"] = new SelectList(_context.Adres, "Adresid", "Adresid", bankkrwi.Adresid);
+            ViewData["Adresid"] = new SelectList(_context.Adres, "Adresid", "Info", bankkrwi.Adresid);
             return View(bankkrwi);
         }
 

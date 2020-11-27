@@ -13,5 +13,7 @@ namespace SBD.Models
         public string Malaria { get; set; }
 
         public virtual Badania Badania { get; set; }
+
+
     }
 }

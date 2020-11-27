@@ -21,7 +21,40 @@ namespace SBD.Controllers
         // GET: Karta
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Kartazdrowia.ToListAsync());
+            var list = await _context.Kartazdrowia.ToListAsync();
+            var newlist = list.Select(x =>
+            {
+                Kartazdrowia karta = new Kartazdrowia();
+                karta.Kartaid = x.Kartaid;
+                if (x.Syfilis == "T")
+                    karta.Syfilis = "TAK";
+                else
+                    karta.Syfilis = "Nie";
+
+                if (x.Malaria == "T")
+                    karta.Malaria = "TAK";
+                else
+                    karta.Malaria = "Nie";
+
+                if (x.Zapaleniewatrobyb == "T")
+                    karta.Zapaleniewatrobyb = "TAK";
+                else
+                    karta.Zapaleniewatrobyb = "Nie";
+
+                if (x.Zapaleniewatrobyc == "T")
+                    karta.Zapaleniewatrobyc = "TAK";
+                else
+                    karta.Zapaleniewatrobyc = "Nie";
+
+                if (x.Hiv == "T")
+                    karta.Hiv = "TAK";
+                else
+                    karta.Hiv = "Nie";
+
+                return karta;
+            });
+
+            return View(newlist);
         }
 
         // GET: Karta/Details/5
@@ -34,12 +67,40 @@ namespace SBD.Controllers
 
             var kartazdrowia = await _context.Kartazdrowia
                 .FirstOrDefaultAsync(m => m.Kartaid == id);
+
             if (kartazdrowia == null)
             {
                 return NotFound();
             }
 
-            return View(kartazdrowia);
+            Kartazdrowia karta = new Kartazdrowia();
+            karta.Kartaid = kartazdrowia.Kartaid;
+            if (kartazdrowia.Syfilis == "T")
+                karta.Syfilis = "TAK";
+            else
+                karta.Syfilis = "Nie";
+
+            if (kartazdrowia.Malaria == "T")
+                karta.Malaria = "TAK";
+            else
+                karta.Malaria = "Nie";
+
+            if (kartazdrowia.Zapaleniewatrobyb == "T")
+                karta.Zapaleniewatrobyb = "TAK";
+            else
+                karta.Zapaleniewatrobyb = "Nie";
+
+            if (kartazdrowia.Zapaleniewatrobyc == "T")
+                karta.Zapaleniewatrobyc = "TAK";
+            else
+                karta.Zapaleniewatrobyc = "Nie";
+
+            if (kartazdrowia.Hiv == "T")
+                karta.Hiv = "TAK";
+            else
+                karta.Hiv = "Nie";
+
+            return View(karta);
         }
 
         // GET: Karta/Create
@@ -59,7 +120,9 @@ namespace SBD.Controllers
             {
                 _context.Add(kartazdrowia);
                 await _context.SaveChangesAsync();
+                _context.Attach(kartazdrowia).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
+
             }
             return View(kartazdrowia);
         }
@@ -96,8 +159,11 @@ namespace SBD.Controllers
             {
                 try
                 {
-                    _context.Update(kartazdrowia);
+                    //var kartazdrowie = await _context.Kartazdrowia.FindAsync(kartazdrowia);
+                    _context.Attach(kartazdrowia).State = EntityState.Modified;
+                    //_context.Update(kartazdrowia);
                     await _context.SaveChangesAsync();
+                    _context.Attach(kartazdrowia).State = EntityState.Detached;
                 }
                 catch (DbUpdateConcurrencyException)
                 {

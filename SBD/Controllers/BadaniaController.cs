@@ -21,8 +21,9 @@ namespace SBD.Controllers
         // GET: Badania
         public async Task<IActionResult> Index()
         {
-            var modelContext = _context.Badania.Include(b => b.Karta);
-            return View(await modelContext.ToListAsync());
+            var modelContext = _context.Badania.AsNoTracking().Include(b => b.Karta);
+
+            return View(modelContext);
         }
 
         // GET: Badania/Details/5
@@ -33,7 +34,7 @@ namespace SBD.Controllers
                 return NotFound();
             }
 
-            var badania = await _context.Badania
+            var badania = await _context.Badania.AsNoTracking()
                 .Include(b => b.Karta)
                 .FirstOrDefaultAsync(m => m.Badaniaid == id);
             if (badania == null)
@@ -47,6 +48,7 @@ namespace SBD.Controllers
         // GET: Badania/Create
         public IActionResult Create()
         {
+            
             ViewData["Kartaid"] = new SelectList(_context.Kartazdrowia, "Kartaid", "Kartaid");
             return View();
         }
@@ -62,7 +64,9 @@ namespace SBD.Controllers
             {
                 _context.Add(badania);
                 await _context.SaveChangesAsync();
+                _context.Attach(badania).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
+
             }
             ViewData["Kartaid"] = new SelectList(_context.Kartazdrowia, "Kartaid", "Kartaid", badania.Kartaid);
             return View(badania);
@@ -76,7 +80,7 @@ namespace SBD.Controllers
                 return NotFound();
             }
 
-            var badania = await _context.Badania.FindAsync(id);
+            var badania = await _context.Badania.FirstOrDefaultAsync(x => x.Badaniaid == id);
             if (badania == null)
             {
                 return NotFound();
@@ -101,8 +105,22 @@ namespace SBD.Controllers
             {
                 try
                 {
-                    _context.Update(badania);
+                    var badanie = await _context.Badania.AsNoTracking().FirstOrDefaultAsync(x => x.Badaniaid == badania.Badaniaid);
+
+                    badanie.Badaniaid = badania.Badaniaid;
+                    badanie.Kartaid = badania.Kartaid; 
+                    badanie.Cisnienie = badania.Cisnienie; 
+                    badanie.Hemoglobina = badania.Hemoglobina; 
+                    badanie.Temperatura = badania.Temperatura; 
+                    badanie.Tetno = badania.Tetno;
+
+                    _context.Update(badanie);
+                    //_context.Entry(badanie).State = EntityState.Modified;
+
                     await _context.SaveChangesAsync();
+
+                    _context.Entry(badanie).State = EntityState.Detached;
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -146,7 +164,8 @@ namespace SBD.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var badania = await _context.Badania.FindAsync(id);
-            _context.Badania.Remove(badania);
+            _context.Entry(badania).State = EntityState.Deleted;
+            //_context.Badania.Remove(badania);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

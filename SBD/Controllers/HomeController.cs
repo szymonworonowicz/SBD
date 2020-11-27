@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SBD.Models;
 
 namespace SBD.Controllers
 {
@@ -10,6 +11,9 @@ namespace SBD.Controllers
     {
         public IActionResult Index()
         {
+            //ModelContext context = new ModelContext();
+
+            //context.Database.EnsureCreated();
             return View();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -30,10 +31,17 @@ namespace SBD.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //base.OnConfiguring(optionsBuilder);
+
+            //var connectioString = $"Filename ={Path.Combine(Directory.GetCurrentDirectory(), "Database.sqlite")}";
+
+            //optionsBuilder.UseSqlite(connectioString);
+            //optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseOracle("Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=212.33.90.213)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=xe)));Persist Security Info=True;User Id=SBD_ST_PS3_3;Password=Haslo;",
-                    o=>o.UseOracleSQLCompatibility("11"));
+                    o => o.UseOracleSQLCompatibility("11"));
+                optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             }
         }
 
@@ -45,10 +53,11 @@ namespace SBD.Models
             {
                 entity.ToTable("ADRES");
 
+                //entity.HasKey(e => e.Adresid);
+
                 entity.Property(e => e.Adresid)
                     .HasColumnName("ADRESID")
-                    .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+                    .HasColumnType("NUMBER(6)");
 
                 entity.Property(e => e.Kodpocztowy)
                     .HasColumnName("KODPOCZTOWY")
@@ -74,14 +83,15 @@ namespace SBD.Models
             {
                 entity.ToTable("BADANIA");
 
+                //entity.HasKey(e => e.Kartaid);
+
                 entity.HasIndex(e => e.Kartaid)
-                    .HasName("BADANIA__IDX")
-                    .IsUnique();
+                    .HasName("BADANIA__IDX");
 
                 entity.Property(e => e.Badaniaid)
                     .HasColumnName("BADANIAID")
                     .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+;
 
                 entity.Property(e => e.Cisnienie)
                     .HasColumnName("CISNIENIE")
@@ -115,16 +125,15 @@ namespace SBD.Models
                 entity.HasKey(e => e.Bankid)
                     .HasName("BANKKRWI_PK");
 
+
                 entity.ToTable("BANKKRWI");
 
                 entity.HasIndex(e => e.Adresid)
-                    .HasName("BANKKRWI__IDX")
-                    .IsUnique();
+                    .HasName("BANKKRWI__IDX");
 
                 entity.Property(e => e.Bankid)
                     .HasColumnName("BANKID")
-                    .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+                    .HasColumnType("NUMBER(6)");
 
                 entity.Property(e => e.Adresid)
                     .HasColumnName("ADRESID")
@@ -145,14 +154,14 @@ namespace SBD.Models
             {
                 entity.ToTable("DONACJA");
 
+                //entity.HasKey(e => e.Badaniaid);
+
                 entity.HasIndex(e => e.Badaniaid)
-                    .HasName("DONACJA__IDX")
-                    .IsUnique();
+                    .HasName("DONACJA__IDX");
 
                 entity.Property(e => e.Donacjaid)
                     .HasColumnName("DONACJAID")
-                    .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+                    .HasColumnType("NUMBER(6)");
 
                 entity.Property(e => e.Badaniaid)
                     .HasColumnName("BADANIAID")
@@ -207,13 +216,13 @@ namespace SBD.Models
                 entity.ToTable("DONATOR");
 
                 entity.HasIndex(e => e.Osobaid)
-                    .HasName("DONATOR__IDX")
-                    .IsUnique();
+                    .HasName("DONATOR__IDX");
+
+                //entity.HasKey(x => x.Donatorid);
 
                 entity.Property(e => e.Donatorid)
                     .HasColumnName("DONATORID")
-                    .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+                    .HasColumnType("NUMBER(6)");
 
                 entity.Property(e => e.GrupaKrwi)
                     .HasColumnName("GRUPA_KRWI")
@@ -257,8 +266,7 @@ namespace SBD.Models
 
                 entity.Property(e => e.Kartaid)
                     .HasColumnName("KARTAID")
-                    .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+                    .HasColumnType("NUMBER(6)");
 
                 entity.Property(e => e.Hiv)
                     .HasColumnName("HIV")
@@ -285,10 +293,10 @@ namespace SBD.Models
             {
                 entity.ToTable("OSOBA");
 
+                //entity.HasKey(e => e.Osobaid);
                 entity.Property(e => e.Osobaid)
                     .HasColumnName("OSOBAID")
-                    .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+                    .HasColumnType("NUMBER(6)");
 
                 entity.Property(e => e.DataUrodzenia)
                     .HasColumnName("DATA_URODZENIA")
@@ -310,13 +318,13 @@ namespace SBD.Models
                 entity.ToTable("PACJENT");
 
                 entity.HasIndex(e => e.Osobaid)
-                    .HasName("PACJENT__IDX")
-                    .IsUnique();
+                    .HasName("PACJENT__IDX");
+
+                //entity.HasKey(x => x.Pacjentid);
 
                 entity.Property(e => e.Pacjentid)
                     .HasColumnName("PACJENTID")
-                    .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+                    .HasColumnType("NUMBER(6)");
 
                 entity.Property(e => e.GrupaKrwi)
                     .HasColumnName("GRUPA_KRWI")
@@ -348,13 +356,12 @@ namespace SBD.Models
                 entity.ToTable("PIELEGNIARKA");
 
                 entity.HasIndex(e => e.Osobaid)
-                    .HasName("PIELEGNIARKA__IDX")
-                    .IsUnique();
+                    .HasName("PIELEGNIARKA__IDX");
 
+                //entity.HasKey(x => x.Pielegniarkaid);
                 entity.Property(e => e.Pielegniarkaid)
                     .HasColumnName("PIELEGNIARKAID")
-                    .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+                    .HasColumnType("NUMBER(6)");
 
                 entity.Property(e => e.Doswiadczenie)
                     .HasColumnName("DOSWIADCZENIE")
@@ -376,13 +383,13 @@ namespace SBD.Models
                 entity.ToTable("TRANSFUZJA");
 
                 entity.HasIndex(e => e.Badaniaid)
-                    .HasName("TRANSFUZJA__IDX")
-                    .IsUnique();
+                    .HasName("TRANSFUZJA__IDX");
+
+                //entity.HasKey(x => x.Transfuzjaid);
 
                 entity.Property(e => e.Transfuzjaid)
                     .HasColumnName("TRANSFUZJAID")
-                    .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+                    .HasColumnType("NUMBER(6)");
 
                 entity.Property(e => e.Badaniaid)
                     .HasColumnName("BADANIAID")
@@ -429,10 +436,11 @@ namespace SBD.Models
 
                 entity.ToTable("TYP_DONACJI");
 
+                //entity.HasKey(e => e.Typid);
+
                 entity.Property(e => e.Typid)
                     .HasColumnName("TYPID")
-                    .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+                    .HasColumnType("NUMBER(6)");
 
                 entity.Property(e => e.Czestotliwosc)
                     .HasColumnName("CZESTOTLIWOSC")
@@ -448,10 +456,11 @@ namespace SBD.Models
             {
                 entity.ToTable("WOREK");
 
+                //entity.HasKey(e => e.Worekid);
+
                 entity.Property(e => e.Worekid)
                     .HasColumnName("WOREKID")
-                    .HasColumnType("NUMBER(6)")
-                    .ValueGeneratedNever();
+                    .HasColumnType("NUMBER(6)");
 
                 entity.Property(e => e.Bankid)
                     .HasColumnName("BANKID")

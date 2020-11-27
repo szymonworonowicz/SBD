@@ -13,11 +13,6 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Donacjaid" class="control-label"></label>
-                <input asp-for="Donacjaid" class="form-control" />
-                <span asp-validation-for="Donacjaid" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Donatorid" class="control-label"></label>
                 <select asp-for="Donatorid" class ="form-control" asp-items="ViewBag.Donatorid"></select>
             </div>

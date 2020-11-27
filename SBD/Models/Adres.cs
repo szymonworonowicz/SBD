@@ -12,5 +12,10 @@ namespace SBD.Models
         public string Kodpocztowy { get; set; }
 
         public virtual Bankkrwi Bankkrwi { get; set; }
+
+        public string Info
+        {
+            get { return $"{Miasto} {Kodpocztowy} {Ulica} {Nrbudynku} "; }
+        }
     }
 }

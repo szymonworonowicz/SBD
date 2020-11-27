@@ -15,5 +15,7 @@ namespace SBD.Models
         public virtual Kartazdrowia Karta { get; set; }
         public virtual Donacja Donacja { get; set; }
         public virtual Transfuzja Transfuzja { get; set; }
+
+
     }
 }
