@@ -157,14 +157,19 @@ namespace SBD.Controllers
 
             var transfuzja = await _context.Transfuzja
                 .Include(t => t.Badania)
-                .Include(t => t.Pacjent)
-                .Include(t => t.Pielegniarka)
+                .Include(t => t.Pacjent.Osoba)
+                .Include(t => t.Pielegniarka.Osoba)
+                
                 .FirstOrDefaultAsync(m => m.Transfuzjaid == id);
+
+
             if (transfuzja == null)
             {
                 return NotFound();
             }
-
+            
+           // _context.Entry(f).Collection(s => s.Students).Load();
+            
             return View(transfuzja);
         }
 
