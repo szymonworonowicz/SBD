@@ -40,64 +40,113 @@ html {
 .menu-list {
     
 }
-td > a{
-    color:black;
+td > a { /*opcje edycji*/
+    color: #ec0101;
 }
 .title {
     font: #cd0a0a;
     
 }
-    .menu-list > li{
-        font-size: 32px;
-        text-align: center;
-        list-style-type: none;
-        text-transform: uppercase;
-        border: 5px solid #eb8f8f;
-        margin:5px;
-        
-        /*
-        background-color: #f1f3de;
-
-        */
-        background-image: linear-gradient(30deg,#f1f3de,#eb8f8f);
-    }
-th {
-    font-size: 16px;
+.menu-list > li {
+    font-size: 32px;
     text-align: center;
     list-style-type: none;
     text-transform: uppercase;
-    border: 5px solid #eb8f8f;
+    border-right: 5px solid #ec0101;
+    border-left: 5px solid #ec0101;
     margin: 5px;
-    text-align:left;
     /*
         background-color: #f1f3de;
 
         */
+    background-color: #f1f3de;s
+}
+    .menu-list > li :hover {
+        
+        
+        /*background-color: #f1f3de;
+
+        
+        */
+        color: #f1f3de;
+        background-color: #ec0101;
+    }
+        .menu-list > li > a:hover {
+            background-color: #ec0101;
+            color: #f1f3de;
+        }
+    .menu-list > li > a {
+        color: #ec0101;
+    }
+
+
+th { /*index etykiety*/
+    font-size: 16px;
+    text-align: center;
+    list-style-type: none;
+    text-transform: uppercase;
+    border-bottom: 5px solid #ec0101;
+    margin: 5px;
+    text-align: left;
+   
+    color: #f1f3de;
+    background-color: #ec0101;
+}
+
+dl > dt /*details etykiety*/ {
+    font-size: 16px;
+    text-align: center;
+    list-style-type: none;
+    text-transform: uppercase;
+    color: #ec0101; 
+    margin: 5px;
+    text-align: left;
+    /*
+    border: 5px solid #eb8f8f;
+    
+        background-color: #f1f3de;
+
+        
     background-color: #f1f3de;
+*/
+}
+form > a { /*return to index in delete*/
+    color: #ec0101;
+}
+dl > dd {/*details pola*/
+    
+}
+
+tr { /*linia w index*/
     
     
 }
-tr {
-    background-image: linear-gradient(30deg,#f1f3de,#eb8f8f);
-    
-}
-td {
+td { /*krotka w index*/
     color: black;
     margin: 5px;
 }
-p > a {
-    color:#eb8f8f;
+p > a { /*button new*/
+    color: #f1f3de;
     margin: 5px;
     background-color: #ec0101;
-    font-size:30px;
-    padding:10px;
+    font-size: 30px;
+    padding: 10px;
 }
-.menu-list > li > a {
+
+div > a {
+    color: #ec0101;
+    margin: 5px;
+   
+}
+input[type=submit] {
+    background-color: #ec0101;
+    color: #f1f3de;
+    border-color: #ec0101;
+}
+div > label {
     color: #ec0101;
 }
-.menu-list > li > a:visited {
-    color: #cd0a0a;
-}
+
 
 .border-top {
     border-top: 1px solid #e5e5e5;
