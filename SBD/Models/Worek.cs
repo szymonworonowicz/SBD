@@ -7,8 +7,8 @@ namespace SBD.Models
     {
         public int Worekid { get; set; }
         public int Bankid { get; set; }
-        public int Transfuzjaid { get; set; }
-        public int Donacjaid { get; set; }
+        public int? Transfuzjaid { get; set; }
+        public int? Donacjaid { get; set; }
         public decimal? Wielkosc { get; set; }
         public string Grupakrwi { get; set; }
         public string Rh { get; set; }

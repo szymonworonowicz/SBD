@@ -47,7 +47,7 @@ namespace SBD.Controllers
         // GET: Donator/Create
         public IActionResult Create()
         {
-            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Osobaid");
+            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Info");
             return View();
         }
 
@@ -82,7 +82,7 @@ namespace SBD.Controllers
             {
                 return NotFound();
             }
-            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Osobaid", donator.Osobaid);
+            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Info", donator.Osobaid);
             return View(donator);
         }
 

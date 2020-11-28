@@ -18,5 +18,8 @@ namespace SBD.Models
 
         public virtual Osoba Osoba { get; set; }
         public virtual ICollection<Transfuzja> Transfuzja { get; set; }
+
+        public string Info => $"{Osoba.Imie} {Osoba.Nazwisko}";
+
     }
 }

@@ -446,9 +446,11 @@ namespace SBD.Models
                     .IsUnicode(false);
             });
 
+
             modelBuilder.Entity<Worek>(entity =>
             {
                 entity.ToTable("WOREK");
+                
 
                 //entity.HasKey(e => e.Worekid);
 

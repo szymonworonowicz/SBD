@@ -21,7 +21,14 @@ namespace SBD.Controllers
         // GET: Donacja
         public async Task<IActionResult> Index()
         {
-            var modelContext = _context.Donacja.Include(d => d.Badania).Include(d => d.Donator).Include(d => d.Pielegniarka).Include(d => d.Typ);
+            var modelContext = _context.Donacja.
+                    Include(d => d.Badania)
+                    .Include(d => d.Donator)
+                    .ThenInclude(d => d.Osoba)
+                    .Include(d => d.Pielegniarka)
+                    .ThenInclude(d => d.Osoba)
+                    .Include(d => d.Typ);
+
             return View(await modelContext.ToListAsync());
         }
 
@@ -36,7 +43,9 @@ namespace SBD.Controllers
             var donacja = await _context.Donacja
                 .Include(d => d.Badania)
                 .Include(d => d.Donator)
+                .ThenInclude(d => d.Osoba)
                 .Include(d => d.Pielegniarka)
+                .ThenInclude(x => x.Osoba)
                 .Include(d => d.Typ)
                 .FirstOrDefaultAsync(m => m.Donacjaid == id);
             if (donacja == null)
@@ -50,10 +59,13 @@ namespace SBD.Controllers
         // GET: Donacja/Create
         public IActionResult Create()
         {
+            var donator = _context.Donator.Include(x => x.Osoba);
+            var pielegniarki = _context.Pielegniarka.Include(x => x.Osoba);
+
             ViewData["Badaniaid"] = new SelectList(_context.Badania, "Badaniaid", "Badaniaid");
-            ViewData["Donatorid"] = new SelectList(_context.Donator, "Donatorid", "Donatorid");
-            ViewData["Pielegniarkaid"] = new SelectList(_context.Pielegniarka, "Pielegniarkaid", "Pielegniarkaid");
-            ViewData["Typid"] = new SelectList(_context.TypDonacji, "Typid", "Typid");
+            ViewData["Donatorid"] = new SelectList(donator, "Donatorid", "Info");
+            ViewData["Pielegniarkaid"] = new SelectList(pielegniarki,"Pielegniarkaid", "Info");
+            ViewData["Typid"] = new SelectList(_context.TypDonacji, "Typid", "Typ");
             return View();
         }
 
@@ -71,10 +83,11 @@ namespace SBD.Controllers
                 _context.Attach(donacja).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["Badaniaid"] = new SelectList(_context.Badania, "Badaniaid", "Badaniaid", donacja.Badaniaid);
-            ViewData["Donatorid"] = new SelectList(_context.Donator, "Donatorid", "Donatorid", donacja.Donatorid);
-            ViewData["Pielegniarkaid"] = new SelectList(_context.Pielegniarka, "Pielegniarkaid", "Pielegniarkaid", donacja.Pielegniarkaid);
-            ViewData["Typid"] = new SelectList(_context.TypDonacji, "Typid", "Typid", donacja.Typid);
+            ViewData["Donatorid"] = new SelectList(_context.Donator, "Donatorid", "Info", donacja.Donatorid);
+            ViewData["Pielegniarkaid"] = new SelectList(_context.Pielegniarka, "Pielegniarkaid", "Info", donacja.Pielegniarkaid);
+            ViewData["Typid"] = new SelectList(_context.TypDonacji, "Typid", "Typ", donacja.Typid);
             return View(donacja);
         }
 
@@ -91,10 +104,13 @@ namespace SBD.Controllers
             {
                 return NotFound();
             }
+
+            var donator = _context.Donator.Include(x => x.Osoba);
+            var pielegniarki = _context.Pielegniarka.Include(x => x.Osoba);
             ViewData["Badaniaid"] = new SelectList(_context.Badania, "Badaniaid", "Badaniaid", donacja.Badaniaid);
-            ViewData["Donatorid"] = new SelectList(_context.Donator, "Donatorid", "Donatorid", donacja.Donatorid);
-            ViewData["Pielegniarkaid"] = new SelectList(_context.Pielegniarka, "Pielegniarkaid", "Pielegniarkaid", donacja.Pielegniarkaid);
-            ViewData["Typid"] = new SelectList(_context.TypDonacji, "Typid", "Typid", donacja.Typid);
+            ViewData["Donatorid"] = new SelectList(donator, "Donatorid", "Info", donacja.Donatorid);
+            ViewData["Pielegniarkaid"] = new SelectList(pielegniarki, "Pielegniarkaid", "Info", donacja.Pielegniarkaid);
+            ViewData["Typid"] = new SelectList(_context.TypDonacji, "Typid", "Typ", donacja.Typid);
             return View(donacja);
         }
 
@@ -149,7 +165,9 @@ namespace SBD.Controllers
             var donacja = await _context.Donacja
                 .Include(d => d.Badania)
                 .Include(d => d.Donator)
+                .ThenInclude(x => x.Osoba)
                 .Include(d => d.Pielegniarka)
+                .ThenInclude(d => d.Osoba)
                 .Include(d => d.Typ)
                 .FirstOrDefaultAsync(m => m.Donacjaid == id);
             if (donacja == null)
@@ -160,14 +178,16 @@ namespace SBD.Controllers
             return View(donacja);
         }
 
+        //TODO 
         // POST: Donacja/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var donacja = await _context.Donacja.FindAsync(id);
-            _context.Donacja.Remove(donacja);
+            _context.Attach(donacja).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

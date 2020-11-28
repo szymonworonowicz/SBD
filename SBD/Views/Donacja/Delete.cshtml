@@ -15,13 +15,13 @@
             @Html.DisplayNameFor(model => model.IloscDonacji)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IloscDonacji)
+            @Html.DisplayFor(model => model.FormatIloscDonacji)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Datadonacji)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Datadonacji)
+            @Html.DisplayFor(model => model.FormatDate)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Badania)
@@ -33,19 +33,19 @@
             @Html.DisplayNameFor(model => model.Donator)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Donator.Donatorid)
+            @Html.DisplayFor(model => model.Donator.Info)
         </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Pielegniarka)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pielegniarka.Pielegniarkaid)
+            @Html.DisplayFor(model => model.Pielegniarka.Info)
         </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Typ)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Typ.Typid)
+            @Html.DisplayFor(model => model.Typ.Typ)
         </dd class>
     </dl>
     

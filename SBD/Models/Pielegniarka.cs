@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Policy;
 
 namespace SBD.Models
 {
@@ -18,5 +19,7 @@ namespace SBD.Models
         public virtual Osoba Osoba { get; set; }
         public virtual ICollection<Donacja> Donacja { get; set; }
         public virtual ICollection<Transfuzja> Transfuzja { get; set; }
+
+        public string Info => $"{Osoba.Imie} {Osoba.Nazwisko}";
     }
 }

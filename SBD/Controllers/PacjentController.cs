@@ -47,7 +47,7 @@ namespace SBD.Controllers
         // GET: Pacjent/Create
         public IActionResult Create()
         {
-            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Osobaid");
+            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Info");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace SBD.Controllers
                 _context.Attach(pacjent).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Osobaid", pacjent.Osobaid);
+            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Info", pacjent.Osobaid);
             return View(pacjent);
         }
 
@@ -82,7 +82,7 @@ namespace SBD.Controllers
             {
                 return NotFound();
             }
-            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Osobaid", pacjent.Osobaid);
+            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Info", pacjent.Osobaid);
             return View(pacjent);
         }
 

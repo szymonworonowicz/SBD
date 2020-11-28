@@ -15,5 +15,6 @@ namespace SBD.Models
         public decimal? Czestotliwosc { get; set; }
 
         public virtual ICollection<Donacja> Donacja { get; set; }
+
     }
 }

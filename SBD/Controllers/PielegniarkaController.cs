@@ -47,7 +47,7 @@ namespace SBD.Controllers
         // GET: Pielegniarka/Create
         public IActionResult Create()
         {
-            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Osobaid");
+            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Info");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace SBD.Controllers
                 _context.Attach(pielegniarka).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Osobaid", pielegniarka.Osobaid);
+            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Info", pielegniarka.Osobaid);
             return View(pielegniarka);
         }
 
@@ -82,7 +82,7 @@ namespace SBD.Controllers
             {
                 return NotFound();
             }
-            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Osobaid", pielegniarka.Osobaid);
+            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Info", pielegniarka.Osobaid);
             return View(pielegniarka);
         }
 
@@ -119,7 +119,7 @@ namespace SBD.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Osobaid", pielegniarka.Osobaid);
+            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Info", pielegniarka.Osobaid);
             return View(pielegniarka);
         }
 

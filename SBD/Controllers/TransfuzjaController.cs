@@ -21,7 +21,12 @@ namespace SBD.Controllers
         // GET: Transfuzja
         public async Task<IActionResult> Index()
         {
-            var modelContext = _context.Transfuzja.Include(t => t.Badania).Include(t => t.Pacjent).Include(t => t.Pielegniarka);
+            var modelContext = _context.Transfuzja
+                .Include(t => t.Badania)
+                .Include(t => t.Pacjent)
+                .ThenInclude(x => x.Osoba)
+                .Include(t => t.Pielegniarka)
+                .ThenInclude(x => x.Osoba);
             return View(await modelContext.ToListAsync());
         }
 
@@ -36,7 +41,9 @@ namespace SBD.Controllers
             var transfuzja = await _context.Transfuzja
                 .Include(t => t.Badania)
                 .Include(t => t.Pacjent)
+                .ThenInclude(x => x.Osoba)
                 .Include(t => t.Pielegniarka)
+                .ThenInclude(x => x.Osoba)
                 .FirstOrDefaultAsync(m => m.Transfuzjaid == id);
             if (transfuzja == null)
             {
@@ -49,9 +56,12 @@ namespace SBD.Controllers
         // GET: Transfuzja/Create
         public IActionResult Create()
         {
+            var pacjent = _context.Pacjent.Include(x => x.Osoba);
+            var pielegniarka = _context.Pielegniarka.Include(x => x.Osoba);
+
             ViewData["Badaniaid"] = new SelectList(_context.Badania, "Badaniaid", "Badaniaid");
-            ViewData["Pacjentid"] = new SelectList(_context.Pacjent, "Pacjentid", "Pacjentid");
-            ViewData["Pielegniarkaid"] = new SelectList(_context.Pielegniarka, "Pielegniarkaid", "Pielegniarkaid");
+            ViewData["Pacjentid"] = new SelectList(pacjent, "Pacjentid", "Info");
+            ViewData["Pielegniarkaid"] = new SelectList(pielegniarka, "Pielegniarkaid", "Info");
             return View();
         }
 
@@ -70,8 +80,8 @@ namespace SBD.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Badaniaid"] = new SelectList(_context.Badania, "Badaniaid", "Badaniaid", transfuzja.Badaniaid);
-            ViewData["Pacjentid"] = new SelectList(_context.Pacjent, "Pacjentid", "Pacjentid", transfuzja.Pacjentid);
-            ViewData["Pielegniarkaid"] = new SelectList(_context.Pielegniarka, "Pielegniarkaid", "Pielegniarkaid", transfuzja.Pielegniarkaid);
+            ViewData["Pacjentid"] = new SelectList(_context.Pacjent, "Pacjentid", "Info", transfuzja.Pacjentid);
+            ViewData["Pielegniarkaid"] = new SelectList(_context.Pielegniarka, "Pielegniarkaid", "Info", transfuzja.Pielegniarkaid);
             return View(transfuzja);
         }
 
@@ -88,9 +98,13 @@ namespace SBD.Controllers
             {
                 return NotFound();
             }
+
+            var pacjent = _context.Pacjent.Include(x => x.Osoba);
+            var pielegniarka = _context.Pielegniarka.Include(x => x.Osoba);
+
             ViewData["Badaniaid"] = new SelectList(_context.Badania, "Badaniaid", "Badaniaid", transfuzja.Badaniaid);
-            ViewData["Pacjentid"] = new SelectList(_context.Pacjent, "Pacjentid", "Pacjentid", transfuzja.Pacjentid);
-            ViewData["Pielegniarkaid"] = new SelectList(_context.Pielegniarka, "Pielegniarkaid", "Pielegniarkaid", transfuzja.Pielegniarkaid);
+            ViewData["Pacjentid"] = new SelectList(pacjent, "Pacjentid", "Info", transfuzja.Pacjentid);
+            ViewData["Pielegniarkaid"] = new SelectList(pielegniarka, "Pielegniarkaid", "Info", transfuzja.Pielegniarkaid);
             return View(transfuzja);
         }
 
