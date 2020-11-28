@@ -157,8 +157,10 @@ namespace SBD.Controllers
 
             var transfuzja = await _context.Transfuzja
                 .Include(t => t.Badania)
-                .Include(t => t.Pacjent.Osoba)
-                .Include(t => t.Pielegniarka.Osoba)
+                .Include(t => t.Pacjent)
+                .ThenInclude(x => x.Osoba)
+                .Include(t => t.Pielegniarka)
+                .ThenInclude(x => x.Osoba)
                 
                 .FirstOrDefaultAsync(m => m.Transfuzjaid == id);
 
