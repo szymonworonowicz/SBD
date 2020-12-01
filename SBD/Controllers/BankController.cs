@@ -47,7 +47,8 @@ namespace SBD.Controllers
         // GET: Bank/Create
         public IActionResult Create()
         {
-            ViewData["Adresid"] = new SelectList(_context.Adres, "Adresid", "Info");
+            var list = _context.Adres.ToList();
+            ViewData["Adresid"] = new SelectList(list, "Adresid", "Info");
             return View();
         }
 
@@ -108,7 +109,7 @@ namespace SBD.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BankkrwiExists(bankkrwi.Bankid))
+                    if (!BankkrwiExists(bankkrwi.Bankid.GetValueOrDefault()))
                     {
                         return NotFound();
                     }

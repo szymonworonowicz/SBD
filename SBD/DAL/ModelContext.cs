@@ -195,7 +195,7 @@ namespace SBD.Models
                 entity.HasOne(d => d.Pielegniarka)
                     .WithMany(p => p.Donacja)
                     .HasForeignKey(d => d.Pielegniarkaid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("DONACJA_PIELEGNIARKA_FK");
 
                 entity.HasOne(d => d.Typ)
@@ -419,7 +419,7 @@ namespace SBD.Models
                 entity.HasOne(d => d.Pielegniarka)
                     .WithMany(p => p.Transfuzja)
                     .HasForeignKey(d => d.Pielegniarkaid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("TRANSFUZJA_PIELEGNIARKA_FK");
             });
 
@@ -502,6 +502,7 @@ namespace SBD.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("WOREK_TRANSFUZJA_FK");
             });
+            #region sekwencje
 
             modelBuilder.HasSequence("ADRES_SQ");
 
@@ -528,6 +529,7 @@ namespace SBD.Models
             modelBuilder.HasSequence("WOREK_SQ");
 
             OnModelCreatingPartial(modelBuilder);
+            #endregion
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

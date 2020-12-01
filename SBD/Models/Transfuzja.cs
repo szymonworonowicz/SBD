@@ -12,10 +12,22 @@ namespace SBD.Models
         }
 
         public int Transfuzjaid { get; set; }
-        public int Pielegniarkaid { get; set; }
-        public int Badaniaid { get; set; }
-        public int Pacjentid { get; set; }
+        [Required(ErrorMessage = "Wymagane")]
+
+        public int? Pielegniarkaid { get; set; }
+        [Required(ErrorMessage = "Wymagane")]
+
+        public int? Badaniaid { get; set; }
+        [Required(ErrorMessage = "Wymagane")]
+
+        public int? Pacjentid { get; set; }
+
+        [RegularExpression(@"^(?:\d{0,3}\,\d{1,2})$|^\d{0,3}$", ErrorMessage = "Format XXX,XX")]
+        [Required(ErrorMessage = "Wymagane")]
+
         public decimal? PotrzebnaIlosc { get; set; }
+
+        [Required(ErrorMessage = "Wymagane")]
         [DataType(DataType.Date)]
         public DateTime? DataTransfuzji { get; set; }
 

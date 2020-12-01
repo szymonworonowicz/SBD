@@ -59,7 +59,7 @@ namespace SBD.Controllers
         // GET: Donacja/Create
         public IActionResult Create()
         {
-            var donator = _context.Donator.Include(x => x.Osoba);
+            var donator = _context.Donator.Include(x => x.Osoba).Where(x => x.Osobaid!=null);
             var pielegniarki = _context.Pielegniarka.Include(x => x.Osoba);
 
             ViewData["Badaniaid"] = new SelectList(_context.Badania, "Badaniaid", "Badaniaid");
@@ -84,9 +84,12 @@ namespace SBD.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            var donator = _context.Donator.Include(x => x.Osoba).Where(x => x.Osobaid != null);
+            var pielegniarki = _context.Pielegniarka.Include(x => x.Osoba).Where(x => x.Osobaid != null);
+
             ViewData["Badaniaid"] = new SelectList(_context.Badania, "Badaniaid", "Badaniaid", donacja.Badaniaid);
-            ViewData["Donatorid"] = new SelectList(_context.Donator, "Donatorid", "Info", donacja.Donatorid);
-            ViewData["Pielegniarkaid"] = new SelectList(_context.Pielegniarka, "Pielegniarkaid", "Info", donacja.Pielegniarkaid);
+            ViewData["Donatorid"] = new SelectList(donator, "Donatorid", "Info", donacja.Donatorid);
+            ViewData["Pielegniarkaid"] = new SelectList(pielegniarki, "Pielegniarkaid", "Info", donacja.Pielegniarkaid);
             ViewData["Typid"] = new SelectList(_context.TypDonacji, "Typid", "Typ", donacja.Typid);
             return View(donacja);
         }

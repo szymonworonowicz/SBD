@@ -49,8 +49,8 @@ namespace SBD.Controllers
         // GET: Worek/Create
         public IActionResult Create()
         {
-            ViewData["Bankid"] = new SelectList(_context.Bankkrwi, "Bankid", "Bankid");
-            ViewData["Donacjaid"] = new SelectList(_context.Donacja, "Donacjaid", "Donacjaid");
+            ViewData["Bankid"] = new SelectList(_context.Bankkrwi.Include(x => x.Adres), "Bankid", "Info");
+            ViewData["Donacjaid"] = new SelectList(_context.Donacja.Include(x => x.Donator).ThenInclude(x => x.Osoba), "Donacjaid", "Info");
             ViewData["Transfuzjaid"] = new SelectList(_context.Transfuzja, "Transfuzjaid", "Transfuzjaid");
             return View();
         }
@@ -69,8 +69,8 @@ namespace SBD.Controllers
                 _context.Attach(worek).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Bankid"] = new SelectList(_context.Bankkrwi, "Bankid", "Bankid", worek.Bankid);
-            ViewData["Donacjaid"] = new SelectList(_context.Donacja, "Donacjaid", "Donacjaid", worek.Donacjaid);
+            ViewData["Bankid"] = new SelectList(_context.Bankkrwi.Include(x => x.Adres), "Bankid", "Info", worek.Bankid);
+            ViewData["Donacjaid"] = new SelectList(_context.Donacja.Include(x => x.Donator).ThenInclude(x => x.Osoba), "Donacjaid", "Info", worek.Donacjaid);
             ViewData["Transfuzjaid"] = new SelectList(_context.Transfuzja, "Transfuzjaid", "Transfuzjaid", worek.Transfuzjaid);
             return View(worek);
         }
@@ -89,7 +89,7 @@ namespace SBD.Controllers
                 return NotFound();
             }
             ViewData["Bankid"] = new SelectList(_context.Bankkrwi, "Bankid", "Bankid", worek.Bankid);
-            ViewData["Donacjaid"] = new SelectList(_context.Donacja, "Donacjaid", "Donacjaid", worek.Donacjaid);
+            ViewData["Donacjaid"] = new SelectList(_context.Donacja, "Donacjaid", "Info", worek.Donacjaid);
             ViewData["Transfuzjaid"] = new SelectList(_context.Transfuzja, "Transfuzjaid", "Transfuzjaid", worek.Transfuzjaid);
             return View(worek);
         }
@@ -128,7 +128,7 @@ namespace SBD.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Bankid"] = new SelectList(_context.Bankkrwi, "Bankid", "Bankid", worek.Bankid);
-            ViewData["Donacjaid"] = new SelectList(_context.Donacja, "Donacjaid", "Donacjaid", worek.Donacjaid);
+            ViewData["Donacjaid"] = new SelectList(_context.Donacja, "Donacjaid", "Info", worek.Donacjaid);
             ViewData["Transfuzjaid"] = new SelectList(_context.Transfuzja, "Transfuzjaid", "Transfuzjaid", worek.Transfuzjaid);
             return View(worek);
         }

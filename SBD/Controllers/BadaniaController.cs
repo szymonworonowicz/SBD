@@ -21,7 +21,7 @@ namespace SBD.Controllers
         // GET: Badania
         public async Task<IActionResult> Index()
         {
-            var modelContext = _context.Badania.AsNoTracking().Include(b => b.Karta);
+            var modelContext = await _context.Badania.AsNoTracking().Include(b => b.Karta).ToListAsync();
 
             return View(modelContext);
         }

@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Kartaid)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Syfilis)
             </th>
             <th>
@@ -33,6 +36,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kartaid)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Syfilis)
             </td>

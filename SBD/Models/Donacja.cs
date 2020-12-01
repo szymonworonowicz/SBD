@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SBD.Models
 {
@@ -11,27 +12,62 @@ namespace SBD.Models
         }
 
         public int Donacjaid { get; set; }
+        [Required(ErrorMessage = "Wymagane")]
+
         public int Donatorid { get; set; }
+        [Required(ErrorMessage = "Wymagane")]
+
         public int Badaniaid { get; set; }
+        [Required(ErrorMessage = "Wymagane")]
+
         public int Pielegniarkaid { get; set; }
+        [Required(ErrorMessage = "Wymagane")]
+
         public int Typid { get; set; }
+        [RegularExpression(@"^\d{0,5}$", ErrorMessage = "Format XXXXX")]
+        [Required(ErrorMessage = "Wymagane")]
         public decimal? IloscDonacji { get; set; }
+        [Required(ErrorMessage = "Wymagane")]
+        [DataType(DataType.Date)]
         public DateTime? Datadonacji { get; set; }
 
-        public string FormatDate => Datadonacji.Value.Date.ToShortDateString();
+        public string FormatDate
+        {
+            get
+            {
+                if(Datadonacji!=null)
+                    return Datadonacji.Value.Date.ToShortDateString();
+                return "";
+            }
+        }
+
         public string FormatIloscDonacji 
         {
             get
             {
-                int donacje =(int) Math.Floor(IloscDonacji.Value);
-                if (donacje == 1)
-                    return $"{donacje} donacja";
-                else if (donacje >= 2 || donacje <=4)
-                    return $"{donacje} donacje";
+                if(IloscDonacji.HasValue)
+                {
+                    int donacje = (int)Math.Floor(IloscDonacji.Value);
+                    if (donacje == 1)
+                        return $"{donacje} donacja";
+                    else if (donacje >= 2 || donacje <= 4)
+                        return $"{donacje} donacje";
 
-                return $"{donacje} donacji";
+                    return $"{donacje} donacji";
+                }
+                return "";
             }
 
+        }
+
+        public string Info
+        {
+            get
+            {
+                if (Donator != null && Donator.Osoba != null)
+                    return $"{Donacjaid} {Donator.Osoba.Info}";
+                return "";
+            }
         }
 
         public virtual Badania Badania { get; set; }

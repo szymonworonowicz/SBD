@@ -65,7 +65,7 @@ namespace SBD.Controllers
                 _context.Attach(donator).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Osobaid", donator.Osobaid);
+            ViewData["Osobaid"] = new SelectList(_context.Osoba, "Osobaid", "Info", donator.Osobaid);
             return View(donator);
         }
 

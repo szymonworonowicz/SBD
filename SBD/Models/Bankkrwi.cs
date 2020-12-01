@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SBD.Models
 {
@@ -10,11 +11,26 @@ namespace SBD.Models
             Worek = new HashSet<Worek>();
         }
 
-        public int Bankid { get; set; }
-        public int Adresid { get; set; }
+        public int? Bankid { get; set; }
+        [Required(ErrorMessage = "Wymagane")]
+
+        public int? Adresid { get; set; }
+        [Required(ErrorMessage = "Wymagane")]
+
+        [MaxLength(20, ErrorMessage = "Za dlugie")]
         public string Typkrwi { get; set; }
 
         public virtual Adres Adres { get; set; }
         public virtual ICollection<Worek> Worek { get; set; }
+
+        public string Info
+        {
+            get
+            {
+                if (Adresid != null)
+                    return $"{Adres.Miasto} {Adres.Ulica} {Adres.Nrbudynku}";
+                return "";
+            }
+        }
     }
 }

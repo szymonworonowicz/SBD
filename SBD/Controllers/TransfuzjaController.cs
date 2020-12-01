@@ -21,13 +21,13 @@ namespace SBD.Controllers
         // GET: Transfuzja
         public async Task<IActionResult> Index()
         {
-            var modelContext = _context.Transfuzja
+            var modelContext = await _context.Transfuzja
                 .Include(t => t.Badania)
                 .Include(t => t.Pacjent)
                 .ThenInclude(x => x.Osoba)
                 .Include(t => t.Pielegniarka)
-                .ThenInclude(x => x.Osoba);
-            return View(await modelContext.ToListAsync());
+                .ThenInclude(x => x.Osoba).ToListAsync();
+            return View(modelContext);
         }
 
         // GET: Transfuzja/Details/5
@@ -79,9 +79,13 @@ namespace SBD.Controllers
                 _context.Attach(transfuzja).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
+
+            var pacjent = _context.Pacjent.Include(x => x.Osoba);
+            var pielegniarka = _context.Pielegniarka.Include(x => x.Osoba);
+
             ViewData["Badaniaid"] = new SelectList(_context.Badania, "Badaniaid", "Badaniaid", transfuzja.Badaniaid);
-            ViewData["Pacjentid"] = new SelectList(_context.Pacjent, "Pacjentid", "Info", transfuzja.Pacjentid);
-            ViewData["Pielegniarkaid"] = new SelectList(_context.Pielegniarka, "Pielegniarkaid", "Info", transfuzja.Pielegniarkaid);
+            ViewData["Pacjentid"] = new SelectList(pacjent, "Pacjentid", "Info", transfuzja.Pacjentid);
+            ViewData["Pielegniarkaid"] = new SelectList(pielegniarka, "Pielegniarkaid", "Info", transfuzja.Pielegniarkaid);
             return View(transfuzja);
         }
 
