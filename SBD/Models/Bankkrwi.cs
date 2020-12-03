@@ -27,7 +27,7 @@ namespace SBD.Models
         {
             get
             {
-                if (Adresid != null)
+                if (Adres != null && Adresid != null)
                     return $"{Adres.Miasto} {Adres.Ulica} {Adres.Nrbudynku}";
                 return "";
             }
