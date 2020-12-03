@@ -20,7 +20,11 @@ namespace SBD.Controllers
         }
 
         // GET: Donacja
+
         /*public async Task<IActionResult> Index()
+=======
+      /*  public async Task<IActionResult> Index()
+>>>>>>> 38355aaac93ae220bc36e752c795259d8b627b3c
         {
             var modelContext = _context.Donacja.
                     Include(d => d.Badania)
@@ -38,7 +42,9 @@ namespace SBD.Controllers
             ViewData["IdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
             ViewData["IloscSortParm"] = sortOrder == "Ilosc" ? "Ilosc_desc" : "Ilosc";
             ViewData["TypSortParm"] = sortOrder == "Typ" ? "Typ_desc" : "Typ";
+
             ViewData["DataSortParm"] = sortOrder == "Data" ? "Data_desc" : "Data";
+
 
             if (searchString != null)
             {
@@ -56,6 +62,7 @@ namespace SBD.Controllers
 
             var items = from Donacja in _context.Donacja
                         select Donacja;
+
             items = items.Include(p => p.Typ).Include(p=>p.Pielegniarka).ThenInclude(p=>p.Osoba).Include(p=>p.Donator).ThenInclude(p=>p.Osoba).Include(p=>p.Badania);
             if (!String.IsNullOrEmpty(searchString) && items.Any())
             {
@@ -67,31 +74,37 @@ namespace SBD.Controllers
                   );
             }
 
-            if (items.Any())
-                switch (sortOrder)
-                {
-                    case "Ilosc_desc":
-                        items = items.OrderByDescending(s => s.IloscDonacji.ToString());
-                        break;
-                    case "Ilosc":
-                        items = items.OrderBy(s => s.IloscDonacji.ToString());
-                        break;
-                    case "Typ_desc":
-                        items = items.OrderByDescending(s => s.Typ.Typ);
-                        break;
-                    case "Typ":
-                        items = items.OrderBy(s => s.Typ.Typ);
-                        break;
-                    case "Data_desc":
-                        items = items.OrderByDescending(s => s.Datadonacji);
-                        break;
-                    case "Data":
-                        items = items.OrderBy(s => s.Datadonacji);
-                        break;
-                    default:
-                        items = items.OrderBy(s => s.Donacjaid);
-                        break;
-                }
+            
+
+            items = items.Include(p => p.Typ);
+            if (!String.IsNullOrEmpty(searchString) && items.Any())
+            {
+
+                items = items.Where(s => s.Typ.Typ.Contains(searchString)
+                  || s.IloscDonacji.ToString().Contains(searchString));
+            }
+
+            if(items.Any())
+            switch (sortOrder)
+            {
+                case "Ilosc_desc":
+                    items = items.OrderByDescending(s => s.IloscDonacji.ToString());
+                    break;
+                case "Ilosc":
+                    items = items.OrderBy(s => s.IloscDonacji.ToString());
+                    break;
+                case "Typ_desc":
+                    items = items.OrderByDescending(s => s.Typ.Typ);
+                    break;
+                case "Typ":
+                    items = items.OrderBy(s => s.Typ.Typ);
+                    break;
+
+                default:
+                    items = items.OrderBy(s => s.Donacjaid);
+                    break;
+            }
+
 
 
             int pageSize = 10;

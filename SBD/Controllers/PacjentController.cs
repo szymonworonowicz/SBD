@@ -58,6 +58,10 @@ namespace SBD.Controllers
                     s.Osoba.Imie.Contains(searchString)
                     || s.Osoba.Nazwisko.Contains(searchString)
                     || s.Priorytet.Contains(searchString)
+                    || s.GrupaKrwi.Contains(searchString)
+                    || s.Waga.ToString().Contains(searchString)
+                    
+
 
                   );
             }

@@ -1,6 +1,11 @@
 @*
+<<<<<<< HEAD
     
 @model IEnumerable<SBD.Models.Donacja>
+=======
+@model IEnumerable<SBD.Models.Donacja>
+    
+>>>>>>> 38355aaac93ae220bc36e752c795259d8b627b3c
 *@
 @model SBD.Pagination.PaginatedList<SBD.Models.Donacja>
 @{
@@ -18,7 +23,9 @@
     <a asp-action="Index" asp-route-sortOrder="@ViewData["TypSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">typ donacji</a>
 
     <a asp-action="Index" asp-route-sortOrder="@ViewData["IloscSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">ilosc donacji</a>
+
     <a asp-action="Index" asp-route-sortOrder="@ViewData["DataSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Data donacji</a>
+
 
 </div>
 <form asp-action="Index" method="get">

@@ -51,7 +51,8 @@ namespace SBD.Controllers
             if (!String.IsNullOrEmpty(searchString) && items.Any())
             {
 
-                items = items.Where(s => s.Adres.ToString().Contains(searchString)
+                items = items.Where(s => s.Adres.Miasto.Contains(searchString)
+                || s.Adres.Ulica.Contains(searchString)
                 || s.Typkrwi.ToString().Contains(searchString)
                 );
             }
@@ -59,10 +60,10 @@ namespace SBD.Controllers
             switch (sortOrder)
             {
                 case "Adres_desc":
-                    items = items.OrderByDescending(s => s.Adres.ToString());
+                    items = items.OrderByDescending(s => s.Adres.Miasto);
                     break;
                 case "Adres":
-                    items = items.OrderBy(s => s.Adres.ToString());
+                    items = items.OrderBy(s => s.Adres.Miasto);
                     break;
                 case "Typ_desc":
                     items = items.OrderByDescending(s => s.Typkrwi);

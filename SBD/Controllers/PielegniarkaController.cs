@@ -57,7 +57,7 @@ namespace SBD.Controllers
                     s =>
                     s.Osoba.Imie.Contains(searchString)
                     || s.Osoba.Nazwisko.Contains(searchString)
-                    
+                    || s.Doswiadczenie.ToString().Contains(searchString)
 
                   );
             }
