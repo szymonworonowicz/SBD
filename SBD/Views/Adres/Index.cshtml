@@ -1,4 +1,8 @@
+@*
+    
 @model IEnumerable<SBD.Models.Adres>
+*@
+@model SBD.Pagination.PaginatedList<SBD.Models.Adres>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,45 +13,86 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<div>
+    sortuj wed³ug
+
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["CitySortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">miasto</a>
+
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["StreetSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Ulica</a>
+</div>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+
+        </p>
+    </div>
+    <div>
+
+
+
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Miasto)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Miasto)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ulica)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Ulica)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nrbudynku)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Nrbudynku)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Kodpocztowy)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Kodpocztowy)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Miasto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ulica)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nrbudynku)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kodpocztowy)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Adresid">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Adresid">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Adresid">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Miasto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ulica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nrbudynku)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kodpocztowy)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Adresid">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Adresid">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Adresid">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

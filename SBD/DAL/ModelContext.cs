@@ -487,19 +487,19 @@ namespace SBD.Models
                 entity.HasOne(d => d.Bank)
                     .WithMany(p => p.Worek)
                     .HasForeignKey(d => d.Bankid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("WOREK_BANKKRWI_FK");
 
                 entity.HasOne(d => d.Donacja)
                     .WithMany(p => p.Worek)
                     .HasForeignKey(d => d.Donacjaid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("WOREK_DONACJA_FK");
 
                 entity.HasOne(d => d.Transfuzja)
                     .WithMany(p => p.Worek)
                     .HasForeignKey(d => d.Transfuzjaid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("WOREK_TRANSFUZJA_FK");
             });
             #region sekwencje

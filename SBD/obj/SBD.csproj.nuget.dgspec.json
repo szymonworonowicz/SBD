@@ -1,21 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Julia\\Source\\Repos\\SBD\\SBD\\SBD.csproj": {}
+    "C:\\Users\\Geoff\\Source\\Repos\\SBD2_12\\SBD\\SBD.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Julia\\Source\\Repos\\SBD\\SBD\\SBD.csproj": {
+    "C:\\Users\\Geoff\\Source\\Repos\\SBD2_12\\SBD\\SBD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Julia\\Source\\Repos\\SBD\\SBD\\SBD.csproj",
+        "projectUniqueName": "C:\\Users\\Geoff\\Source\\Repos\\SBD2_12\\SBD\\SBD.csproj",
         "projectName": "SBD",
-        "projectPath": "C:\\Users\\Julia\\Source\\Repos\\SBD\\SBD\\SBD.csproj",
-        "packagesPath": "C:\\Users\\Julia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Julia\\Source\\Repos\\SBD\\SBD\\obj\\",
+        "projectPath": "C:\\Users\\Geoff\\Source\\Repos\\SBD2_12\\SBD\\SBD.csproj",
+        "packagesPath": "C:\\Users\\Geoff\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Geoff\\Source\\Repos\\SBD2_12\\SBD\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Julia\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Geoff\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -26,7 +31,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +42,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -91,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,5 +1,8 @@
-@model IEnumerable<SBD.Models.Badania>
+@*
 
+    @model IEnumerable<SBD.Models.Badania>
+*@
+@model SBD.Pagination.PaginatedList<SBD.Models.Badania>
 @{
     ViewData["Title"] = "Index";
 }
@@ -9,51 +12,95 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<div>
+    sortuj wed³ug
+
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["HemoSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">hemoglobina</a>
+
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["CisnSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">cisnienie</a>
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["TetnoSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">tetno</a>
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["TempSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">temperatura</a>
+</div>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+
+        </p>
+    </div>
+    <div>
+
+
+
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Hemoglobina)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Hemoglobina)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Temperatura)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Temperatura)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cisnienie)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Cisnienie)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Tetno)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Tetno)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Karta)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Karta)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hemoglobina)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Temperatura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cisnienie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tetno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Karta.Kartaid)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Badaniaid">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Badaniaid">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Badaniaid">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hemoglobina)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temperatura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cisnienie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tetno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Karta.Kartaid)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Badaniaid">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Badaniaid">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Badaniaid">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

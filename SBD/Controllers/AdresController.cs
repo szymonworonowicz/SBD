@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SBD.Models;
+using SBD.Pagination;
 
 namespace SBD.Controllers
 {
@@ -19,9 +20,53 @@ namespace SBD.Controllers
         }
 
         // GET: Adres
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            return View(await _context.Adres.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["CitySortParm"] = String.IsNullOrEmpty(sortOrder) ? "City_desc" : "";
+            ViewData["StreetSortParm"] = sortOrder == "Street" ? "Street_desc" : "Street";
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+
+            
+            
+            var items = from Adres in _context.Adres
+                           select Adres;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                
+                items = items.Where(s => s.Miasto.Contains(searchString)
+                                    || s.Ulica.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "City_desc":
+                    items = items.OrderByDescending(s => s.Miasto);
+                    break;
+                case "Street":
+                    items = items.OrderBy(s => s.Ulica);
+                    break;
+                case "Street_desc":
+                    items = items.OrderByDescending(s => s.Ulica);
+                    break;
+                default:
+                    items = items.OrderBy(s => s.Miasto);
+                    break;
+            }
+            
+
+            int pageSize = 10;
+            return View(await PaginatedList<Adres>.CreateAsync(items.AsNoTracking(), pageNumber ?? 1, pageSize));
+            
         }
 
         // GET: Adres/Details/5

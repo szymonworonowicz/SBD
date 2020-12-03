@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SBD.Models;
+using SBD.Pagination;
 
 namespace SBD.Controllers
 {
@@ -19,11 +20,84 @@ namespace SBD.Controllers
         }
 
         // GET: Badania
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             var modelContext = await _context.Badania.AsNoTracking().Include(b => b.Karta).ToListAsync();
 
             return View(modelContext);
+        }*/
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["IdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
+            ViewData["TempSortParm"] = sortOrder == "Temp" ? "Temp_desc" : "Temp";
+            ViewData["CisnSortParm"] = sortOrder == "Cisn" ? "Cisn_desc" : "Cisn";
+            ViewData["TetnoSortParm"] = sortOrder == "Tetno" ? "Tetno_desc" : "Tetno";
+            ViewData["HemoSortParm"] = sortOrder == "Hemo" ? "Hemo_desc" : "Hemo";
+            
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+
+
+
+            var items = from Badania in _context.Badania
+                         select Badania;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+
+                items = items.Where(s => s.Cisnienie.Contains(searchString)
+                || s.Temperatura.ToString().Contains(searchString)
+                || s.Tetno.ToString().Contains(searchString)
+                || s.Hemoglobina.ToString().Contains(searchString));
+            }
+            
+            ViewData["TempSortParm"] = sortOrder == "Temp" ? "Temp_desc" : "Temp";
+            ViewData["CisnSortParm"] = sortOrder == "Cisn" ? "Cisn_desc" : "Cisn";
+            ViewData["TetnoSortParm"] = sortOrder == "Tetno" ? "Tetno_desc" : "Tetno";
+            switch (sortOrder)
+            {
+                case "Hemo_desc":
+                    items = items.OrderByDescending(s => s.Hemoglobina);
+                    break;
+                case "Temp":
+                    items = items.OrderBy(s => s.Temperatura);
+                    break;
+                case "Temp_desc":
+                    items = items.OrderByDescending(s => s.Temperatura);
+                    break;
+                case "Cisn_desc":
+                    items = items.OrderByDescending(s => s.Cisnienie);
+                    break;
+                case "Cisn":
+                    items = items.OrderBy(s => s.Cisnienie);
+                    break;
+                case "Tetno":
+                    items = items.OrderBy(s => s.Tetno);
+                    break;
+                case "Tetno_desc":
+                    items = items.OrderByDescending(s => s.Tetno);
+                    break;
+                case "Hemo":
+                    items = items.OrderBy(s => s.Hemoglobina);
+                    break;
+                default:
+                    items = items.OrderBy(s => s.Badaniaid);
+                    break;
+            }
+
+
+            int pageSize = 10;
+            return View(await PaginatedList<Badania>.CreateAsync(items.AsNoTracking(), pageNumber ?? 1, pageSize));
+
         }
 
         // GET: Badania/Details/5
