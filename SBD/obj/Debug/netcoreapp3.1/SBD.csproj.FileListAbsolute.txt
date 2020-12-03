@@ -1132,3 +1132,4 @@ C:\Users\Geoff\Source\Repos\SBD2_12\SBD\obj\Debug\netcoreapp3.1\staticwebassets\
 C:\Users\Geoff\Source\Repos\SBD2_12\SBD\obj\Debug\netcoreapp3.1\SBD.dll
 C:\Users\Geoff\Source\Repos\SBD2_12\SBD\obj\Debug\netcoreapp3.1\SBD.pdb
 C:\Users\Geoff\Source\Repos\SBD2_12\SBD\obj\Debug\netcoreapp3.1\SBD.genruntimeconfig.cache
+C:\Users\user\source\repos\SBD\SBD\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout1.cshtml.g.cs

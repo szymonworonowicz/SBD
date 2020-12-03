@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using SBD.Models;
 using SBD.Pagination;
 
@@ -46,8 +47,7 @@ namespace SBD.Controllers
 
 
 
-            var items = from Bankkrwi in _context.Bankkrwi
-                        select Bankkrwi;
+            var items = _context.Bankkrwi.Include(b => b.Adres).AsQueryable();
             if (!String.IsNullOrEmpty(searchString) && items.Any())
             {
                 
@@ -55,7 +55,6 @@ namespace SBD.Controllers
                 || s.Typkrwi.ToString().Contains(searchString));
             }
 
-           
             switch (sortOrder)
             {
                 case "Adres_desc":
@@ -123,6 +122,7 @@ namespace SBD.Controllers
                 _context.Attach(bankkrwi).State = EntityState.Detached;
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["Adresid"] = new SelectList(_context.Adres, "Adresid", "Info", bankkrwi.Adresid);
             return View(bankkrwi);
         }
