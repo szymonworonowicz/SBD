@@ -56,7 +56,8 @@ namespace SBD.Controllers
                 items = items.Where(s => s.Cisnienie.Contains(searchString)
                 || s.Temperatura.ToString().Contains(searchString)
                 || s.Tetno.ToString().Contains(searchString)
-                || s.Hemoglobina.ToString().Contains(searchString));
+                || s.Hemoglobina.ToString().Contains(searchString)
+                );
             }
             
            

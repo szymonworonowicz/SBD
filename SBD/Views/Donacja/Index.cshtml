@@ -1,5 +1,8 @@
+@*
+    
 @model IEnumerable<SBD.Models.Donacja>
-
+*@
+@model SBD.Pagination.PaginatedList<SBD.Models.Donacja>
 @{
     ViewData["Title"] = "Donacje";
 }
@@ -9,57 +12,100 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<div>
+    sortuj wed³ug
+
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["TypSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">typ donacji</a>
+
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["IloscSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">ilosc donacji</a>
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["DataSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Data donacji</a>
+
+</div>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+
+        </p>
+    </div>
+    <div>
+
+
+
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IloscDonacji)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().IloscDonacji)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Datadonacji)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Datadonacji)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Badania)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Badania)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Donator)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Donator)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pielegniarka)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Pielegniarka)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Typ)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Typ)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FormatIloscDonacji)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FormatDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Badania.Badaniaid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Donator.Info)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pielegniarka.Info)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Typ.Typ)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Donacjaid">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Donacjaid">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Donacjaid">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormatIloscDonacji)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormatDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Badania.Badaniaid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Donator.Info)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pielegniarka.Info)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Typ.Typ)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Donacjaid">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Donacjaid">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Donacjaid">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

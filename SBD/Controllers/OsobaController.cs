@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SBD.Models;
+using SBD.Pagination;
 
 namespace SBD.Controllers
 {
@@ -19,11 +20,69 @@ namespace SBD.Controllers
         }
 
         // GET: Osoba
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             return View(await _context.Osoba.ToListAsync());
-        }
+        }*/
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["IdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
 
+            ViewData["NazwiskoSortParm"] = sortOrder == "Nazw" ? "Nazw_desc" : "Nazw";
+
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+
+
+
+            var items = from Osoba in _context.Osoba
+                        select Osoba;
+            
+            if (!String.IsNullOrEmpty(searchString) && items.Any())
+            {
+
+                items = items.Where(
+                    s =>
+                    s.Imie.Contains(searchString)
+                    || s.Nazwisko.Contains(searchString)
+                    
+
+
+                  );
+            }
+
+            if (items.Any())
+                switch (sortOrder)
+                {
+
+                    case "Nazw_desc":
+                        items = items.OrderByDescending(s => s.Nazwisko);
+                        break;
+                    case "Nazw":
+                        items = items.OrderBy(s => s.Nazwisko);
+                        break;
+
+                    default:
+                        items = items.OrderBy(s => s.Osobaid);
+                        break;
+                }
+
+
+            int pageSize = 10;
+            return View(await PaginatedList<Osoba>.CreateAsync(items.AsNoTracking(), pageNumber ?? 1, pageSize));
+
+        }
         // GET: Osoba/Details/5
         public async Task<IActionResult> Details(int? id)
         {

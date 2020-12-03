@@ -45,7 +45,8 @@ namespace SBD.Controllers
             {
                 
                 items = items.Where(s => s.Miasto.Contains(searchString)
-                                    || s.Ulica.Contains(searchString));
+                                    || s.Ulica.Contains(searchString)
+                                    );
             }
             switch (sortOrder)
             {

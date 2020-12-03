@@ -32,7 +32,7 @@ namespace SBD.Controllers
             ViewData["IdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
             ViewData["AdresSortParm"] = sortOrder == "Adres" ? "Adres_desc" : "Adres";
             ViewData["TypSortParm"] = sortOrder == "Typ" ? "Typ_desc" : "Typ";
-            
+
             if (searchString != null)
             {
                 pageNumber = 1;
@@ -50,9 +50,10 @@ namespace SBD.Controllers
             var items = _context.Bankkrwi.Include(b => b.Adres).AsQueryable();
             if (!String.IsNullOrEmpty(searchString) && items.Any())
             {
-                
+
                 items = items.Where(s => s.Adres.ToString().Contains(searchString)
-                || s.Typkrwi.ToString().Contains(searchString));
+                || s.Typkrwi.ToString().Contains(searchString)
+                );
             }
 
             switch (sortOrder)
