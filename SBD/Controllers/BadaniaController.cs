@@ -49,8 +49,7 @@ namespace SBD.Controllers
 
 
 
-            var items = from Badania in _context.Badania
-                         select Badania;
+            var items = _context.Badania.Include(x => x.Karta).AsQueryable(); //jak ci nie podciaga to zamieniasz linq na cos takiego
             if (!String.IsNullOrEmpty(searchString) && items.Any())
             {
 
