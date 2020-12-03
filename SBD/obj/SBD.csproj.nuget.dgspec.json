@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Geoff\\Source\\Repos\\SBD2_12\\SBD\\SBD.csproj": {}
+    "C:\\Users\\Geoff\\source\\repos\\SBD2_12\\SBD\\SBD.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Geoff\\Source\\Repos\\SBD2_12\\SBD\\SBD.csproj": {
+    "C:\\Users\\Geoff\\source\\repos\\SBD2_12\\SBD\\SBD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Geoff\\Source\\Repos\\SBD2_12\\SBD\\SBD.csproj",
+        "projectUniqueName": "C:\\Users\\Geoff\\source\\repos\\SBD2_12\\SBD\\SBD.csproj",
         "projectName": "SBD",
-        "projectPath": "C:\\Users\\Geoff\\Source\\Repos\\SBD2_12\\SBD\\SBD.csproj",
+        "projectPath": "C:\\Users\\Geoff\\source\\repos\\SBD2_12\\SBD\\SBD.csproj",
         "packagesPath": "C:\\Users\\Geoff\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Geoff\\Source\\Repos\\SBD2_12\\SBD\\obj\\",
+        "outputPath": "C:\\Users\\Geoff\\source\\repos\\SBD2_12\\SBD\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
