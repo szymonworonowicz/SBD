@@ -51,7 +51,7 @@ namespace SBD.Controllers
 
             var items = from Badania in _context.Badania
                          select Badania;
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString) && items.Any())
             {
 
                 items = items.Where(s => s.Cisnienie.Contains(searchString)
@@ -60,9 +60,7 @@ namespace SBD.Controllers
                 || s.Hemoglobina.ToString().Contains(searchString));
             }
             
-            ViewData["TempSortParm"] = sortOrder == "Temp" ? "Temp_desc" : "Temp";
-            ViewData["CisnSortParm"] = sortOrder == "Cisn" ? "Cisn_desc" : "Cisn";
-            ViewData["TetnoSortParm"] = sortOrder == "Tetno" ? "Tetno_desc" : "Tetno";
+           
             switch (sortOrder)
             {
                 case "Hemo_desc":

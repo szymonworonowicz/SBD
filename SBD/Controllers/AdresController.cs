@@ -41,7 +41,7 @@ namespace SBD.Controllers
             
             var items = from Adres in _context.Adres
                            select Adres;
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString) && items.Any())
             {
                 
                 items = items.Where(s => s.Miasto.Contains(searchString)
